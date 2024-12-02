@@ -1,4 +1,5 @@
 <?php
+//64, 61, 65, 67, 69 pas gerer
     function isInOrder ($split, $deleted = false) {
         $order = null;
         $last_level = null;
@@ -15,7 +16,6 @@
             if(abs($diff) > 3 || $diff == 0){
                 $is_safe = false;
                 $deleted_now = true;
-                echo("BAD DIFF\n");
             }
 
             if($is_safe && $diff > 0) {
@@ -24,7 +24,6 @@
                 } else if($order != 'DESC') {
                     $is_safe = false;
                     $deleted_now = true;
-                    echo("BAD ORDER DESC\n");
                 }
             } else if($diff < 0){
                 if(!$order) {
@@ -32,7 +31,6 @@
                 } else if($order != 'ASC') {
                     $is_safe = false;
                     $deleted_now = true;
-                    echo("BAD ORDER ASC\n");
                 }
             } else {
                 $is_safe = false;
@@ -48,25 +46,21 @@
                 }
                 $diff = $last_level - $split[$key+1];
                 if(abs($diff) > 3 || $diff == 0){
-                    echo("BAD DIFF 1 \n");
-                    break;
+                    break 1;
                 }
                 if($diff > 0) {
                     if($key == 1) {
                         $order = 'DESC';
                     } else if($order != 'DESC') {
-                        echo("BAD ORDER DESC 1\n");
                         break;
                     }
                 } else if($diff < 0){
                     if($key == 1) {
                         $order = 'ASC';
                     } else if($order != 'ASC') {
-                        echo("BAD ORDER ASC 1\n");
                         break;
                     }
                 } else {
-                    echo("BAD DIFF3\n");
                     break;
                 }
                 $is_safe = true;
@@ -92,9 +86,9 @@
         if($is_safe) {
             $safe++;
         } else {
-            echo("ligne ".($line_key+ 1)."\n");
+            echo("$array");
         }
         
     }
-    echo($safe);
+    echo("\n".$safe);
 ?>
